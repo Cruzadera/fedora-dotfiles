@@ -1,0 +1,6 @@
+# Install with: npm install -g <name>
+eslint
+pnpm
+typescript
+vite
+

@@ -1,0 +1,16 @@
+{
+  "Go main": {
+    "prefix": "gomain",
+    "body": [
+      "package main",
+      "",
+      "import \"fmt\"",
+      "",
+      "func main() {",
+      "  fmt.Println(\"Hello, world\")",
+      "}"
+    ],
+    "description": "Create a simple Go main package"
+  }
+}
+

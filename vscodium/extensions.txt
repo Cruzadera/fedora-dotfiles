@@ -1,0 +1,11 @@
+# Recommended extensions
+ms-azuretools.vscode-docker
+ms-python.python
+ms-python.vscode-pylance
+pkief.material-icon-theme
+redhat.vscode-yaml
+rust-lang.rust-analyzer
+tamasfe.even-better-toml
+vadimcn.vscode-lldb
+vscjava.vscode-java-pack
+yzhang.markdown-all-in-one

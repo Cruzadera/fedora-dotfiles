@@ -1,0 +1,30 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*.bak
+
+# Build outputs
+dist/
+build/
+target/
+out/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+
+# Logs
+*.log
+

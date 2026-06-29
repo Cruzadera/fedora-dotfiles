@@ -1,0 +1,10 @@
+# Install with: cargo install <name>
+bat
+eza
+git-delta
+hyperfine
+just
+procs
+sd
+tealdeer
+

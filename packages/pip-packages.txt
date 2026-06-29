@@ -1,0 +1,9 @@
+# User-level Python packages
+black
+cookiecutter
+ipython
+pip-tools
+pre-commit
+pytest
+ruff
+

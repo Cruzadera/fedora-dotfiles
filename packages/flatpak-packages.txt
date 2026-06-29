@@ -1,0 +1,12 @@
+# Desktop applications
+com.brave.Browser
+com.discordapp.Discord
+com.github.tchx84.Flatseal
+com.google.Chrome
+com.obsproject.Studio
+com.spotify.Client
+io.github.mimbrero.WhatsAppDesktop
+org.chromium.Chromium
+org.kde.krita
+org.videolan.VLC
+

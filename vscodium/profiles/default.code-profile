@@ -1,0 +1,13 @@
+{
+  "name": "Default",
+  "settings": {
+    "editor.formatOnSave": true,
+    "workbench.iconTheme": "catppuccin noctis icons"
+  },
+  "extensions": [
+    "ms-azuretools.vscode-docker",
+    "ms-python.python",
+    "redhat.vscode-yaml"
+  ]
+}
+

@@ -1,0 +1,4 @@
+# Prefer module@version entries when possible.
+# Example:
+# golang.org/x/tools/cmd/godoc@latest
+

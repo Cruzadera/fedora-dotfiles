@@ -1,0 +1,44 @@
+# Backups and generated archives
+backups/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Secrets and private material
+ssh/id_*
+ssh/*.key
+ssh/*.pem
+ssh/*.pub
+ssh/known_hosts
+ssh/authorized_keys
+gpg/
+*.gpg
+*.age
+*.asc
+
+# Shell history and local caches
+.bash_history
+.zsh_history
+.cache/
+*.swp
+*.swo
+*.tmp
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.directory
+.idea/
+.vscode/
+
+# Local scratch files from the workspace
+prueba.go
+roma-gruvbox.omp.json
+roma-gruvbox.README.md
+
+# Local state
+*.local
+*.secret
+*.token
+*.credentials
