@@ -49,6 +49,13 @@ install_dnf_packages() {
   fi
   mapfile -t packages < <(strip_comments "$manifest" || true)
   if ((${#packages[@]})); then
+    for pkg in "${packages[@]}"; do
+      if [[ "$pkg" =~ [[:space:]] ]] || [[ ${#pkg} -gt 100 ]]; then
+        log "ERROR: Package manifest appears corrupted (line: ${pkg:0:50}...)"
+        log "Run './scripts/export.sh packages' to regenerate"
+        return 1
+      fi
+    done
     sudo dnf install -y "${packages[@]}"
   fi
 }

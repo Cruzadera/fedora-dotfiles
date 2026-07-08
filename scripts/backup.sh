@@ -12,7 +12,7 @@ safe_mkdir "$dest"
 log "Creating backup snapshot in $dest"
 
 if require_cmd dnf; then
-  dnf repoquery --userinstalled --qf '%{name}' 2>/dev/null \
+  dnf repoquery --userinstalled --qf '%{name}\n' 2>/dev/null \
     | grep -v '^$' | sort -u > "$dest/dnf-packages.txt" || true
 fi
 

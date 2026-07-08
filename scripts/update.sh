@@ -7,7 +7,7 @@ source "$ROOT_DIR/scripts/lib.sh"
 safe_mkdir "$ROOT_DIR/packages"
 
 if require_cmd dnf; then
-  dnf repoquery --userinstalled --qf '%{name}' 2>/dev/null \
+  dnf repoquery --userinstalled --qf '%{name}\n' 2>/dev/null \
     | grep -v '^$' | sort -u > "$ROOT_DIR/packages/dnf-packages.txt" || true
 fi
 

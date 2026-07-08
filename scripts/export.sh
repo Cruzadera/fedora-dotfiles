@@ -208,7 +208,7 @@ export_packages() {
   safe_mkdir "$dest"
 
   if require_cmd dnf; then
-    dnf repoquery --userinstalled --qf '%{name}' 2>/dev/null \
+    dnf repoquery --userinstalled --qf '%{name}\n' 2>/dev/null \
       | grep -v '^$' | sort -u > "$dest/dnf-packages.txt" || true
     log "Exported DNF package list"
   fi
