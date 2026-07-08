@@ -165,6 +165,11 @@ install_vscodium_config() {
   local base="$HOME_DIR/.config/VSCodium/User"
   link_file "$ROOT_DIR/vscodium/settings.json" "$base/settings.json"
   link_file "$ROOT_DIR/vscodium/keybindings.json" "$base/keybindings.json"
+  if [[ -d "$ROOT_DIR/vscodium/snippets" ]]; then
+    safe_mkdir "$base/snippets"
+    find "$ROOT_DIR/vscodium/snippets" -maxdepth 1 -type f -name '*.json' \
+      -exec link_file {} "$base/snippets/$(basename {})" \;
+  fi
 }
 
 install_vscodium_extensions() {
@@ -185,44 +190,90 @@ install_vscodium_extensions() {
 install_terminal_config() {
   link_file "$ROOT_DIR/terminal/fastfetch/config.jsonc" "$HOME_DIR/.config/fastfetch/config.jsonc"
   link_file "$ROOT_DIR/terminal/btop/btop.conf" "$HOME_DIR/.config/btop/btop.conf"
+  if [[ -f "$ROOT_DIR/terminal/starship/starship.toml" ]]; then
+    link_file "$ROOT_DIR/terminal/starship/starship.toml" "$HOME_DIR/.config/starship.toml"
+  fi
 }
 
 install_docker_config() {
-  link_file "$ROOT_DIR/docker/daemon.json" "$HOME_DIR/.config/docker/daemon.json"
-  link_file "$ROOT_DIR/docker/config.json.example" "$HOME_DIR/.docker/config.json.example"
+  if [[ -f "$ROOT_DIR/docker/daemon.json" ]]; then
+    safe_mkdir "$HOME_DIR/.docker"
+    copy_file "$ROOT_DIR/docker/daemon.json" "$HOME_DIR/.docker/daemon.json"
+    if [[ -d "/etc/docker" ]]; then
+      sudo mkdir -p /etc/docker 2>/dev/null || true
+      sudo cp -a "$ROOT_DIR/docker/daemon.json" /etc/docker/daemon.json 2>/dev/null || true
+    fi
+  fi
 }
 
 restore_kde_config() {
   local src="$ROOT_DIR/kde"
+  local restored=false
+
   if [[ -d "$src/plasma" ]]; then
     safe_mkdir "$HOME_DIR/.config"
-    cp -a "$src/plasma"/. "$HOME_DIR/.config/" 2>/dev/null || true
+    find "$src/plasma" -maxdepth 1 -type f ! -name '.gitkeep' \
+      -exec cp -a {} "$HOME_DIR/.config/" \;
+    restored=true
   fi
+
   if [[ -d "$src/konsole" ]]; then
     safe_mkdir "$HOME_DIR/.local/share/konsole"
-    cp -a "$src/konsole"/. "$HOME_DIR/.local/share/konsole/" 2>/dev/null || true
+    find "$src/konsole" -maxdepth 1 -type f ! -name '.gitkeep' \
+      -exec cp -a {} "$HOME_DIR/.local/share/konsole/" \;
+    restored=true
   fi
+
   if [[ -d "$src/kwin" ]]; then
     safe_mkdir "$HOME_DIR/.config"
-    cp -a "$src/kwin"/. "$HOME_DIR/.config/" 2>/dev/null || true
+    find "$src/kwin" -maxdepth 1 -type f ! -name '.gitkeep' \
+      -exec cp -a {} "$HOME_DIR/.config/" \;
+    restored=true
   fi
+
   if [[ -d "$src/color-schemes" ]]; then
     safe_mkdir "$HOME_DIR/.local/share/color-schemes"
-    cp -a "$src/color-schemes"/. "$HOME_DIR/.local/share/color-schemes/" 2>/dev/null || true
+    find "$src/color-schemes" -maxdepth 1 -type f ! -name '.gitkeep' \
+      -exec cp -a {} "$HOME_DIR/.local/share/color-schemes/" \;
+    restored=true
   fi
+
   if [[ -d "$src/icons" ]]; then
-    safe_mkdir "$HOME_DIR/.local/share/icons"
-    cp -a "$src/icons"/. "$HOME_DIR/.local/share/icons/" 2>/dev/null || true
+    for d in "$src/icons"/*/; do
+      [[ -d "$d" ]] || continue
+      local name
+      name="$(basename "$d")"
+      [[ "$name" == ".gitkeep" ]] && continue
+      safe_mkdir "$HOME_DIR/.local/share/icons/$name"
+      cp -a "$d"* "$HOME_DIR/.local/share/icons/$name/" 2>/dev/null || true
+    done
+    restored=true
   fi
+
   if [[ -d "$src/wallpapers" ]]; then
-    safe_mkdir "$HOME_DIR/.local/share/wallpapers"
-    cp -a "$src/wallpapers"/. "$HOME_DIR/.local/share/wallpapers/" 2>/dev/null || true
+    for d in "$src/wallpapers"/*/; do
+      [[ -d "$d" ]] || continue
+      local name
+      name="$(basename "$d")"
+      [[ "$name" == ".gitkeep" ]] && continue
+      safe_mkdir "$HOME_DIR/.local/share/wallpapers/$name"
+      cp -a "$d"* "$HOME_DIR/.local/share/wallpapers/$name/" 2>/dev/null || true
+    done
+    restored=true
+  fi
+
+  if $restored; then
+    log "KDE configuration restored"
   fi
 }
 
 backup_all() {
   safe_mkdir "$BACKUP_DIR"
   "$ROOT_DIR/scripts/backup.sh"
+}
+
+export_all() {
+  "$ROOT_DIR/scripts/export.sh" "$@"
 }
 
 restore_all() {

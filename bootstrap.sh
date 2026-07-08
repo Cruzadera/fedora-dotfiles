@@ -20,6 +20,9 @@ main() {
     restore)
       restore_all "$@"
       ;;
+    export)
+      export_all "$@"
+      ;;
     update)
       update_manifests "$@"
       ;;
@@ -32,9 +35,14 @@ main() {
 
 usage() {
   cat <<'EOF'
-Usage: bootstrap.sh [install|backup|restore|update]
+Usage: bootstrap.sh [install|backup|restore|export|update]
+
+  install   Install packages and restore all configurations
+  backup    Create a timestamped snapshot of the live system
+  restore   Restore configurations from the repository
+  export    Export live system configs into the repository
+  update    Refresh package manifests from the live system
 EOF
 }
 
 main "$@"
-
