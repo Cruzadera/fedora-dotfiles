@@ -1,18 +1,20 @@
 {
-  "editor.fontFamily": "Monaspace Neon, JetBrains Mono Nerd Font, monospace",
-  "editor.fontLigatures": true,
-  "editor.minimap.enabled": false,
-  "editor.formatOnSave": true,
-  "files.autoSave": "onFocusChange",
-  "files.trimTrailingWhitespace": true,
-  "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "material-icon-theme",
-  "telemetry.telemetryLevel": "off",
-  "window.titleBarStyle": "custom",
-  "git.autofetch": true,
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
-  "explorer.confirmDelete": false,
-  "diffEditor.ignoreTrimWhitespace": false
+    "terminal.integrated.fontFamily": "'MesloLGM Nerd Font Mono'",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.lineHeight": 1.15,
+    "editor.fontFamily": "JetBrainsMono Nerd Font",
+    "editor.fontLigatures": true,
+    "catppuccin-noctis-icons.hidesExplorerArrows": false,
+    "workbench.iconTheme": "catppuccin noctis icons",
+    "json.schemaDownload.trustedDomains": {
+        "https://developer.microsoft.com/json-schemas/": true,
+        "https://json-schema.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://ohmyposh.dev": true,
+        "https://raw.githubusercontent.com/devcontainers/spec/": true,
+        "https://raw.githubusercontent.com/microsoft/vscode/": true,
+        "https://schemastore.azurewebsites.net/": true,
+        "https://www.schemastore.org/": true
+    },
+    "git.autofetch": true
 }
-

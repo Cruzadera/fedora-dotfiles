@@ -1,42 +1,5 @@
 [user]
-	name = Your Name
-	email = you@example.com
-
-[core]
-	editor = codium
-	excludesfile = ~/.gitignore_global
-	autocrlf = input
-
-[init]
-	defaultBranch = main
-
-[pull]
-	rebase = false
-
-[push]
-	default = simple
-
-[fetch]
-	prune = true
-
-[merge]
-	conflictstyle = zdiff3
-
-[rebase]
-	autoStash = true
-
+	email = mariamunozcruzado@pm.me
+	name = María
 [credential]
-	helper = cache --timeout=3600
-
-[diff]
-	colorMoved = default
-
-[alias]
-	st = status
-	co = checkout
-	br = branch
-	ci = commit
-	unstage = reset HEAD --
-	last = log -1 --stat
-	lg = log --graph --oneline --decorate --all
-
+	helper = libsecret

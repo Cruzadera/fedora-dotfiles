@@ -1,55 +1,27 @@
-# Fedora KDE Bash configuration
+# .bashrc
 
-case $- in
-  *i*) ;;
-  *) return ;;
-esac
-
-export EDITOR="${EDITOR:-vscodium}"
-export VISUAL="${VISUAL:-$EDITOR}"
-export PAGER="${PAGER:-less}"
-export BROWSER="${BROWSER:-firefox}"
-export LANG="${LANG:-en_US.UTF-8}"
-
-if [[ -z "${DOTFILES_HOME:-}" ]]; then
-  if command -v readlink >/dev/null 2>&1; then
-    DOTFILES_HOME="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
-  else
-    DOTFILES_HOME="$HOME/fedora-dotfiles"
-  fi
-fi
-export DOTFILES_HOME
-
-if [[ -f "$HOME/.local/share/fedora-dotfiles/functions.sh" ]]; then
-  # shellcheck disable=SC1090
-  source "$HOME/.local/share/fedora-dotfiles/functions.sh"
-else
-  # shellcheck disable=SC1090
-  source "$DOTFILES_HOME/bash/functions.sh"
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
 fi
 
-export GOPATH="${GOPATH:-$HOME/go}"
-export GOBIN="${GOBIN:-$HOME/go/bin}"
-export JAVA_HOME="${JAVA_HOME:-/usr/lib/jvm/java-21-openjdk}"
-export SDKMAN_DIR="${SDKMAN_DIR:-$HOME/.sdkman}"
-export DOCKER_HOST="${DOCKER_HOST:-unix:///var/run/docker.sock}"
-
-pathprepend "$HOME/.local/bin"
-pathprepend "$GOBIN"
-pathprepend "$HOME/.cargo/bin"
-pathprepend "$HOME/.npm-global/bin"
-pathprepend "$HOME/.dotnet/tools"
-
-if [[ -d "$SDKMAN_DIR/bin" ]]; then
-  # shellcheck disable=SC1090
-  source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
-
-if [[ -f "$HOME/.bash_aliases" ]]; then
-  # shellcheck disable=SC1090
-  source "$HOME/.bash_aliases"
-fi
-
 export PATH
 
-PS1='\u@\h:\w\$ '
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+#eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/gruvbox.omp.json)"
+eval "$(oh-my-posh init bash --config ~/Documentos/aprendiendo-go/roma-gruvbox.omp.json)"
