@@ -66,9 +66,13 @@ install_flatpak_packages() {
     log "flatpak not available, skipping Flatpak packages"
     return 0
   fi
+  if ! flatpak remotes --columns=name | grep -q '^flathub$'; then
+    log "Adding Flathub remote..."
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || true
+  fi
   mapfile -t packages < <(strip_comments "$manifest" || true)
   for package in "${packages[@]}"; do
-    flatpak install -y flathub "$package"
+    flatpak install -y flathub "$package" || true
   done
 }
 
