@@ -1,0 +1,214 @@
+{
+  "$schema": "https://ohmyposh.dev/schema.json",
+  "version": 3,
+  "final_space": true,
+  "console_title": false,
+  "terminal_background": "#282828",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "os",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#89B4FA",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": " {{ .Icon }} "
+        },
+        {
+          "type": "path",
+          "style": "diamond",
+          "foreground": "#EBDBB2",
+          "background": "#3C3836",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": " 󰉋 {{ .Path }} ",
+          "properties": {
+            "max_depth": 3,
+            "truncation_symbol": "…",
+            "home_icon": "~"
+          }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#A9B665",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if .HEAD }}  {{ .HEAD }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#A9B665",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .Working.Added 0 }}  +{{ .Working.Added }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#D8A657",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .Working.Modified 0 }}  {{ .Working.Modified }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#EA6962",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .Working.Deleted 0 }}  {{ .Working.Deleted }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#282828",
+          "background": "#EA6962",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .Working.Conflicted 0 }}  {{ .Working.Conflicted }} {{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#928374",
+          "background": "#3C3836",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .Ahead 0 }} ⇡{{ .Ahead }}{{ end }}{{ if gt .Behind 0 }} ⇣{{ .Behind }}{{ end }}"
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "foreground": "#928374",
+          "background": "#3C3836",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "{{ if gt .StashCount 0 }}  {{ .StashCount }} {{ end }}"
+        },
+        {
+          "type": "java",
+          "style": "plain",
+          "foreground": "#E78A4E",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "#A9B665",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#D8A657",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "rust",
+          "style": "plain",
+          "foreground": "#E78A4E",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "dotnet",
+          "style": "plain",
+          "foreground": "#89B4FA",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "php",
+          "style": "plain",
+          "foreground": "#89B4FA",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "ruby",
+          "style": "plain",
+          "foreground": "#EA6962",
+          "background": "#32302F",
+          "template": "{{ if .Full }}  {{ .Full }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "terraform",
+          "style": "plain",
+          "foreground": "#89B4FA",
+          "background": "#32302F",
+          "template": "{{ if .Version }}  {{ .Version }} {{ end }}",
+          "properties": {
+            "display_mode": "files"
+          }
+        },
+        {
+          "type": "kubectl",
+          "style": "plain",
+          "foreground": "#7DAEA3",
+          "background": "#32302F",
+          "template": "{{ if .Context }} 󱃾 {{ .Version }} {{ end }}"
+        },
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "foreground": "#928374",
+          "background": "#3C3836",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": " 󰔛 {{ .FormattedMs }} ",
+          "properties": {
+            "threshold": 3000
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": false,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#D8A657",
+          "background": "transparent",
+          "template": "❯"
+        }
+      ]
+    }
+  ]
+}

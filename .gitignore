@@ -32,11 +32,6 @@ Thumbs.db
 .idea/
 .vscode/
 
-# Local scratch files from the workspace
-prueba.go
-roma-gruvbox.omp.json
-roma-gruvbox.README.md
-
 # Local state
 *.local
 *.secret
