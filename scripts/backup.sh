@@ -138,7 +138,7 @@ elif [[ -f "$HOME/.docker/daemon.json" ]]; then
 fi
 
 safe_mkdir "$dest/kde"
-for f in kwinrc konsolerc kcminputrc kdeglobals; do
+for f in kwinrc konsolerc kcminputrc kdeglobals plasmarc kglobalshortcutsrc khotkeysrc kscreenlockerrc powermanagementprofilesrc kcmfonts kcminput; do
   if [[ -f "$HOME/.config/$f" ]]; then
     safe_mkdir "$dest/kde/kwin"
     cp -a "$HOME/.config/$f" "$dest/kde/kwin/$f"
@@ -147,6 +147,10 @@ done
 if [[ -f "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" ]]; then
   safe_mkdir "$dest/kde/plasma"
   cp -a "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" "$dest/kde/plasma/"
+fi
+if [[ -f "$HOME/.config/plasmashellrc" ]]; then
+  safe_mkdir "$dest/kde/plasma"
+  cp -a "$HOME/.config/plasmashellrc" "$dest/kde/plasma/"
 fi
 if [[ -d "$HOME/.local/share/konsole" ]]; then
   safe_mkdir "$dest/kde/konsole"

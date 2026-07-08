@@ -182,8 +182,10 @@ install_vscodium_config() {
   link_file "$ROOT_DIR/vscodium/keybindings.json" "$base/keybindings.json"
   if [[ -d "$ROOT_DIR/vscodium/snippets" ]]; then
     safe_mkdir "$base/snippets"
-    find "$ROOT_DIR/vscodium/snippets" -maxdepth 1 -type f -name '*.json' \
-      -exec link_file {} "$base/snippets/$(basename {})" \;
+    for snippet in "$ROOT_DIR/vscodium/snippets"/*.json; do
+      [[ -f "$snippet" ]] || continue
+      link_file "$snippet" "$base/snippets/$(basename "$snippet")"
+    done
   fi
 }
 

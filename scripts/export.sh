@@ -140,7 +140,14 @@ export_kde() {
   local dest="$ROOT_DIR/kde"
   safe_mkdir "$dest"
 
-  for f in kwinrc konsolerc kcminputrc kdeglobals; do
+  local plasma_configs=(
+    kwinrc konsolerc kcminputrc kdeglobals
+    plasmarc kglobalshortcutsrc khotkeysrc
+    kscreenlockerrc powermanagementprofilesrc
+    kcmfonts kcminput
+  )
+
+  for f in "${plasma_configs[@]}"; do
     if [[ -f "$HOME/.config/$f" ]]; then
       safe_mkdir "$dest/kwin"
       cp -a "$HOME/.config/$f" "$dest/kwin/$f"
@@ -148,10 +155,17 @@ export_kde() {
     fi
   done
 
-  if [[ -f "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" ]]; then
+  local appletsrc="$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc"
+  if [[ -f "$appletsrc" ]]; then
     safe_mkdir "$dest/plasma"
-    cp -a "$HOME/.config/plasma-org.kde.plasma.desktop-appletsrc" "$dest/plasma/"
+    cp -a "$appletsrc" "$dest/plasma/"
     log "Exported plasma appletsrc"
+  fi
+
+  if [[ -f "$HOME/.config/plasmashellrc" ]]; then
+    safe_mkdir "$dest/plasma"
+    cp -a "$HOME/.config/plasmashellrc" "$dest/plasma/"
+    log "Exported plasmashellrc"
   fi
 
   if [[ -d "$HOME/.local/share/konsole" ]]; then
