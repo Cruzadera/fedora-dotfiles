@@ -56,7 +56,7 @@ install_dnf_packages() {
         return 1
       fi
     done
-    sudo dnf install -y "${packages[@]}"
+    sudo dnf install -y --skip-unavailable "${packages[@]}"
   fi
 }
 

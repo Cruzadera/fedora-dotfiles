@@ -4,7 +4,6 @@ btop
 curl
 dconf-editor
 docker
-docker-compose-plugin
 fastfetch
 fd-find
 fzf
@@ -16,11 +15,9 @@ jq
 konsole
 kwalletmanager5
 neovim
-nerd-fonts
 pipewire-utils
 podman
 ripgrep
-starship
 tmux
 unzip
 vim
@@ -38,7 +35,6 @@ nodejs
 npm
 python3
 python3-pip
-python3-pipx
 ruby
 rust
 cargo

@@ -1,0 +1,9 @@
+# Install with: python3 -m pip install --user <name>
+black
+cookiecutter
+ipython
+pip-tools
+pipx
+pre-commit
+pytest
+ruff

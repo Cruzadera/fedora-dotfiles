@@ -6,5 +6,6 @@ hyperfine
 just
 procs
 sd
+starship
 tealdeer
 
