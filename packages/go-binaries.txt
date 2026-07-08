@@ -1,1 +1,2 @@
-gopls
+# Install with: go install <name>
+gopls@latest

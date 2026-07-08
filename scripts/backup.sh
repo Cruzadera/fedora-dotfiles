@@ -44,7 +44,7 @@ fi
 if require_cmd go; then
   gobin="$(go env GOPATH)/bin"
   if [[ -d "$gobin" ]]; then
-    find "$gobin" -maxdepth 1 -type f -printf '%f\n' 2>/dev/null \
+    find "$gobin" -maxdepth 1 -type f -printf '%f@latest\n' 2>/dev/null \
       | sort -u > "$dest/go-binaries.txt" || true
   fi
 fi

@@ -105,7 +105,10 @@ install_go_binaries() {
   fi
   mapfile -t packages < <(strip_comments "$manifest" || true)
   for package in "${packages[@]}"; do
-    go install "$package"
+    if [[ "$package" != *@* ]]; then
+      package="$package@latest"
+    fi
+    go install "$package" || true
   done
 }
 
