@@ -1,2 +1,2 @@
-# Install with: go install <name>
-gopls@latest
+# Install with: go install <module>@latest
+golang.org/x/tools/gopls@latest

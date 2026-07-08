@@ -24,8 +24,15 @@ fi
 if require_cmd go; then
   gobin="$(go env GOPATH)/bin"
   if [[ -d "$gobin" ]]; then
-    find "$gobin" -maxdepth 1 -type f -printf '%f@latest\n' 2>/dev/null \
-      | sort -u > "$ROOT_DIR/packages/go-binaries.txt" || true
+    > "$ROOT_DIR/packages/go-binaries.txt"
+    for bin in "$gobin"/*; do
+      [[ -f "$bin" ]] || continue
+      modpath=$(go version -m "$bin" 2>/dev/null | awk '/^\tmod / {print $2}' | head -1)
+      if [[ -n "$modpath" ]]; then
+        echo "${modpath}@latest" >> "$ROOT_DIR/packages/go-binaries.txt"
+      fi
+    done
+    sort -u -o "$ROOT_DIR/packages/go-binaries.txt" "$ROOT_DIR/packages/go-binaries.txt"
   fi
 fi
 

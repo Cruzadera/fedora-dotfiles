@@ -105,9 +105,6 @@ install_go_binaries() {
   fi
   mapfile -t packages < <(strip_comments "$manifest" || true)
   for package in "${packages[@]}"; do
-    if [[ "$package" != *@* ]]; then
-      package="$package@latest"
-    fi
     go install "$package" || true
   done
 }
@@ -117,9 +114,13 @@ install_npm_packages() {
   if ! require_cmd npm; then
     return 0
   fi
+  if [[ ! -d "$HOME_DIR/.npm-global" ]]; then
+    safe_mkdir "$HOME_DIR/.npm-global"
+    npm config set prefix "$HOME_DIR/.npm-global" 2>/dev/null || true
+  fi
   mapfile -t packages < <(strip_comments "$manifest" || true)
   if ((${#packages[@]})); then
-    npm install -g "${packages[@]}"
+    npm install -g "${packages[@]}" || true
   fi
 }
 
